@@ -36,20 +36,22 @@ public class countPlanes {
         }
 
         Collections.sort(timesList, (i1, i2) -> {
-            if (i1.start == i2.end) return i1.end - i2.end;
+            if (i1.start == i2.start) return i1.end - i2.end;
             return i1.start - i2.start;
         });
 
         // scan
         int count = 0;
+        int ans = 0;
         for (Interval i : timesList) {
             if (i.end == 1) {
                 count++;
             } else {
                 count--;
             }
+            ans = Math.max(ans, count); // maintain the max value
         }
-        return count;
+        return ans;
 }
 
    public static void main(String[] args) {
