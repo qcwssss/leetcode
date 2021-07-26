@@ -1,5 +1,3 @@
-import java.awt.*;
-import java.util.List;
 import java.util.*;
 
 /**
@@ -49,38 +47,34 @@ public class countPlanes {
   }
   // use priority queue to count planes on the air at once
   public static int countPlanesByPQ(Interval[] airplanes) {
-    
+    // write your code here
     Arrays.sort(airplanes, (a, b) -> (a.start - b.start));
     PriorityQueue<Interval> pq = new PriorityQueue<>((p1, p2) -> p1.end - p2.end);
 
-    // scan schedule
+    // scan array
     if (airplanes.length != 0) pq.add(airplanes[0]);
-    for (int i = 0; i < airplanes.length; i++) {
+    for (int i = 1; i < airplanes.length; i++) {
       Interval cur = airplanes[i];
-      if (pq.isEmpty() ) {
-        pq.add(cur);
-      } else {
-        if (pq.peek().end <= cur.start) {
-          pq.poll();
-        } else {
-          pq.add(cur);
-        }
+      if (pq.peek().end <= cur.start) {
+        pq.poll();
       }
-
+      pq.add(cur);
     }
     return pq.size();
-
   }
 
   public static void main(String[] args) {
     Interval[] planesList = {
       new Interval(1, 10), new Interval(2, 3), new Interval(5, 8), new Interval(4, 7)
     };
+    Interval[] planes2 = {new Interval(1, 4), new Interval(1, 4), new Interval(1, 4)};
     int answer = countOfAirplanes(Arrays.asList(planesList));
     System.out.println("sweep line method: " + answer);
 
-    int answer2 = countPlanesByPQ(planesList);
-    System.out.println("Priority Queue method: " + answer2);
+    int answer1 = countPlanesByPQ(planesList);
+    System.out.println("Priority Queue method: " + answer1);
 
+    int answer2 = countPlanesByPQ(planes2);
+    System.out.println("Priority Queue method: (1,4)*3 " + answer2);
   }
 }
