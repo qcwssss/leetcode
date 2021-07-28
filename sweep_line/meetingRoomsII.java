@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,16 +9,17 @@ public class meetingRoomsII {
     public static int findMinNumRooms(int[][] intervals) {
         Arrays.sort(intervals, (a, b) -> (a[0] - b[0]));
         //int[][] weights = new int[intervals.length*2][2];
-        ArrayList<int[]> weights = new ArrayList<>(intervals.length * 2);
+        ArrayList<Point> weights = new ArrayList<>(intervals.length * 2);
         for (int[] i : intervals) {
-            weights.add(new int[]{i[0], 1});
-            weights.add(new int[]{i[1], -1});
+            // use Point replace (new int[]{i[0], 1})
+            weights.add(new Point(i[0], 1));
+            weights.add(new Point(i[1], -1));
         }
-        Collections.sort(weights, (a, b) -> (a[0] - b[0])); // sort by time(start or end)
+        Collections.sort(weights, (a, b) -> (a.x - b.x)); // sort by time(start or end)
         int count = 0;
         int res = 0;
-        for (int[] i : weights) {
-            if (i[1] == 1) {
+        for (Point i : weights) {
+            if (i.y == 1) {
                 count++;
             } else {
                 count--;
