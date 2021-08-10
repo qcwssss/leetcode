@@ -1,5 +1,6 @@
 package array_leet;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -10,51 +11,38 @@ public class RomanToInteger {
 
     int sum = 0;
 
-    Map<Character, Integer> map =
-    for(int i = 0; i < s.length(); i++) {
-      char c = s.charAt(i);
-      int[] num = new int[s.length()];
+    Map<Character, Integer> map = new HashMap<>();
+    map.put('I', 1);
+    map.put('V', 5);
+    map.put('X', 10);
+    map.put('L', 50);
+    map.put('C', 100);
+    map.put('D', 500);
+    map.put('M', 1000);
 
-      switch(c) {
-        case 'I':
-          num[i] =1;
-          break;
+    for(int i = 0; i < s.length() -1; i++) {
+      int cur = map.get(s.charAt(i));
+      int next = map.get(s.charAt(i + 1));
 
-        case 'V':
-          num[i] = 5;
-          break;
-
-        case 'X':
-          num[i] = 10;
-          break;
-
-        case 'L':
-          num[i] = 50;
-          break;
-
-        case 'C':
-          num[i] = 100;
-          break;
-
-        case 'D':
-          num[i] = 500;
-          break;
-
-        case 'M':
-          num[i] = 1000;
-          break;
-
-        default:
-          break;
-
+      if ( cur < next ) {
+        sum -= cur;
+      } else {
+        sum += cur;
       }
     }
+
+    sum += map.get(s.charAt(s.length() -1));
     return sum;
 
   }
 
   public static void main(String[] args) {
-    System.out.println(new RomanToInteger().romanToInt("III"));
+    String s58 = "LVIII";
+    String s1994 = "MCMXCIV";
+    System.out.println("III: " + new RomanToInteger().romanToInt("III"));
+    System.out.println(s58 +": " + new RomanToInteger().romanToInt(s58));
+    System.out.println(s1994 +": " + new RomanToInteger().romanToInt(s1994));
+
   }
 
 }
