@@ -5,40 +5,44 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.HashMap;
 
 
 public class ValidParentheses {
 
-  public boolean isValid(String s) {
+  /* Misunderstand the problem. */
+  public boolean isValidNotForThisProblem(String s) {
     // first, check odd or even
+    if (s.length() % 2 != 0) return false;
     //count  1: (), 2: [], 3: {}
     int[] count = {0, 0, 0};
     int[] valid = {0, 0, 0};
 
-    String res = count.toString();
     for(int i = 0; i < s.length(); i++) {
-      if(s.charAt(i) == '(') {
-        count[0]++;
-      }
-      else if (s.charAt(i) == ')') {
-        count[0]--;
-      }
-      else if(s.charAt(i) == '[') {
-        count[1]++;
-      }
-      else if(s.charAt(i) == ']') {
-        count[1]--;
-      }
+      switch (s.charAt(i)) {
+        case '(':
+          count[0]++;
+          break;
 
-      else if(s.charAt(i) == '{') {
-        count[2]++;
-      }
+        case ')':
+          count[0]--;
+          break;
 
-      else if(s.charAt(i) == '}') {
-        count[2]--;
-      }
+        case '[':
+          count[1]++;
+          break;
 
+        case ']':
+          count[1]--;
+          break;
+
+        case '{':
+          count[2]++;
+          break;
+
+        case '}':
+          count[2]--;
+          break;
+      }
     }
     return Arrays.equals(count, valid);
   }
@@ -46,7 +50,7 @@ public class ValidParentheses {
   @Test
   public void testAnswer() {
     String input1 = "{[]}";
-    Assert.assertTrue(isValid(input1));
+    Assert.assertTrue(isValidNotForThisProblem(input1));
 
   }
 
