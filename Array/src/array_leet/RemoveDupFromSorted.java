@@ -17,12 +17,27 @@ public class RemoveDupFromSorted {
     return i + 1;
   }
 
+  public int removeDuplicatesMine(int[] nums) {
+    if (nums.length == 0) return 0;
+    int ptr = 0;
+    for (int i = 0; i < nums.length; i++) {
+      if (nums[ptr] != nums[i]) {
+        ptr++;
+        nums[ptr] = nums[i];
+      }
+    }
+    return ptr + 1;
+
+  }
+
 
 
   @Test
   public void testRemoveDupFromSortedArray() {
     int[] nums1 = new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-    int actual = removeDuplicates(nums1);
+    //int actual = removeDuplicates(nums1);
+    int actual = removeDuplicatesMine(nums1);
+
     System.out.println(actual);
   }
 }
