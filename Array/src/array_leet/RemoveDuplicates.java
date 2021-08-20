@@ -2,7 +2,7 @@ package array_leet;
 
 import org.junit.Test;
 
-public class RemoveDupFromSorted {
+public class RemoveDuplicates {
 
   // official solution, using two pointers
   public int removeDuplicates(int[] nums) {
@@ -30,14 +30,31 @@ public class RemoveDupFromSorted {
 
   }
 
+  /* Remove duplicates with the given value. */
+  // official solution using two pointers
+  public int removeElement(int[] nums, int val) {
+    int i = 0;
+    for (int j = 0; j < nums.length; j++) {
+      if (nums[j] != val) {
+        nums[i] = nums[j];
+        i++;
+      }
+    }
+    return i;
+  }
+
 
 
   @Test
   public void testRemoveDupFromSortedArray() {
     int[] nums1 = new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+    int[] nums2 = new int[] {3,2,2,3};
     //int actual = removeDuplicates(nums1);
     int actual = removeDuplicatesMine(nums1);
+    int actual2 = removeElement(nums2, 3);
 
     System.out.println(actual);
+    System.out.println(actual2);
+
   }
 }
