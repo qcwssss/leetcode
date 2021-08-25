@@ -10,12 +10,27 @@ public class MaximumSubarray {
     int res = nums[0];
     for (int i = 0; i < nums.length; i++) {
       int sum = 0;
-      for (int j = 0; j < nums.length; j++) {
+      for (int j = i; j < nums.length; j++) {
         sum += nums[j];
         res = Math.max(sum, res);
       }
     }
     return res;
+  }
+
+  /**
+   * Kadane's Algorithm
+   * @source https://leetcode.com/problems/maximum-subarray/discuss/20211/Accepted-O(n)-solution-in-java
+   * @param A
+   * @return
+   */
+  public static int maxSubArrayON(int[] A) {
+    int maxSoFar=A[0], maxEndingHere=A[0];
+    for (int i=1;i<A.length;++i){
+      maxEndingHere= Math.max(maxEndingHere+A[i],A[i]);
+      maxSoFar=Math.max(maxSoFar, maxEndingHere);
+    }
+    return maxSoFar;
   }
 
   @Test
