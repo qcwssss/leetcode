@@ -1,8 +1,7 @@
 package array_leet;
 
-import org.junit.Assert;
 import org.junit.Test;
-
+// #66. Plus One
 public class PlusOne {
 
   /*
@@ -29,13 +28,34 @@ public class PlusOne {
     return ans;
   }
 
+  public int[] plusOneSmart(int[] digits) {
+    int n = digits.length;
+    for (int i = n -1; i >= 0; i--) {
+      if (digits[i] < 9) {
+        digits[i] += 1;
+        return digits;
+      }
+        digits[i] = 0;
+    }
+
+    // for the case that the whole input array is 9s.
+    // For example : 99999-----> 100000
+    // Any other case would return in the loop.
+    int[] newDigits = new int[n + 1];
+    newDigits[0] = 1;
+
+    return newDigits;
+  }
+
   @Test
   public void testPlusOne() {
     int[] n1 = new int[] {1, 2, 3};
-    int[] ex1 = new int[] {1, 2, 4};
     int[] actual = plusOne(n1);
-    //Assert.assertTrue(ex1.equals(actual));
+
     int[] n2 = new int[] {9,8,7,6,5,4,3,2,1,0};
     int[] actual2 = plusOne(n2);
+
+    int[] n3 = new int[] {9};
+    plusOneSmart(n3);
   }
 }
