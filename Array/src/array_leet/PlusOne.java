@@ -28,6 +28,11 @@ public class PlusOne {
     return ans;
   }
 
+  /**
+   * @source  https://leetcode.com/problems/plus-one/discuss/?currentPage=1&orderBy=most_votes&query=
+   * @param digits
+   * @return
+   */
   public int[] plusOneSmart(int[] digits) {
     int n = digits.length;
     for (int i = n -1; i >= 0; i--) {
