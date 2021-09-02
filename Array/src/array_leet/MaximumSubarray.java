@@ -33,6 +33,22 @@ public class MaximumSubarray {
     return maxSoFar;
   }
 
+  /**
+   * DP soulution, very explicit video
+   * @source https://backtobackswe.com/platform/content/max-contiguous-subarray-sum/solutions
+   */
+  public int maxSubArrayDP(int[] nums) {
+    // dynamic programing
+    int maxSoFar = nums[0], maxEndHere = nums[0];
+    for (int i = 1; i < nums.length; i++) {
+        // [idx : i , max: max[i - 1] + nums[i] || nums[i]]
+        maxEndHere = Math.max(maxEndHere + nums[i], nums[i]);
+        maxSoFar = Math.max(maxSoFar, maxEndHere);
+        
+    }
+    return maxSoFar;
+}
+
   @Test
   public void testMaxSubarray() {
     int[] nums1 = {-2,1,-3,4,-1,2,1,-5,4 };
