@@ -31,4 +31,19 @@ public class BuyAndSellStock {
     }
     return profit;
   }
+
+  /**
+   * Convert into max subarray
+   * @source https://leetcode.com/problems/best-time-to-buy-and-sell-stock/discuss/39038/Kadane's-Algorithm-Since-no-one-has-mentioned-about-this-so-far-%3A)-(In-case-if-interviewer-twists-the-input)
+   * @param prices
+   * @return
+   */
+  public int maxProfit_MaxSubarray(int[] prices) {
+    int maxSoFar = 0, maxCur = 0;
+    for (int i = 1; i < prices.length; i++) {
+      maxCur = Math.max(0, maxCur + (prices[i] - prices[i - 1]));
+      maxSoFar = Math.max(maxSoFar, maxCur);
+    }
+    return maxSoFar;
+  }
 }
