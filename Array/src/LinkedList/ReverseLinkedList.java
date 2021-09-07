@@ -1,5 +1,7 @@
 package LinkedList;
 
+import java.util.List;
+
 /**
  * Definition for singly-linked list. public class ListNode { int val; ListNode next; ListNode() {}
  * ListNode(int val) { this.val = val; } ListNode(int val, ListNode next) { this.val = val;
@@ -22,15 +24,22 @@ public class ReverseLinkedList {
     }
   }
 
+  /**
+   * @source https://leetcode.com/problems/reverse-linked-list/discuss/58125/In-place-iterative-and-recursive-Java-solution
+   * @param head
+   * @return
+   */
   public ListNode reverseList(ListNode head) {
-    ListNode rev = new ListNode();
-    rev.val = head.val;
-    ListNode ptrHead = head.next, ptrRev = rev;
-    while (head.next != null) {
-      ptrRev.next = new ListNode(ptrRev.val, new ListNode());
-      ptrHead = ptrHead.next;
-      ptrRev = ptrRev.next;
+    /* iterative solution. */
+    ListNode newHead = null;
+    while (head != null) {
+      // put head.next in the prev of head
+      ListNode next = head.next;
+      head.next = newHead;
+      newHead = head;
+      head = next;
     }
-    return rev;
+    return newHead;
+
   }
 }
