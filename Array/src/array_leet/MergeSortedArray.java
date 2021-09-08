@@ -5,26 +5,12 @@ import java.util.Arrays;
 public class MergeSortedArray {
 
 
-  public void merge(int[] nums1, int m, int[] nums2, int n) {
-    if (nums2.length == 0) return;
 
-    int[] res = new int[m + n];
-    int i = 0, j = 0, k = 0;
-    while (k < m + n - 1) {
-      int cur1 = nums1[i], cur2 = nums2[j];
-      if (cur1 > cur2) {
-        res[k] = cur2;
-        j++;
-      } else {
-        res[k] = cur1;
-      }
-      k++;
-    }
-
-    nums1 = res;
-  }
-
-  /** Two pointers, adding from the tail. */
+  /** Two pointers, adding from the tail.
+   * @source https://www.youtube.com/watch?v=0PHGaGma6j8
+   * @source https://github.com/ojasmaru/LetsAlgoTogether/blob/master/Merge%20Sorted%20Array/Java/QuickStart.java
+   *
+   * */
   public static void merge2(int[] nums1, int m, int[] nums2, int n) {
 
     int i = m - 1, j = n - 1, k = m + n - 1;
