@@ -12,6 +12,7 @@ public class ValidPalindromeII {
     // time limit exceeded
     while (i <= j) {
       if (s.charAt(i) != s.charAt(j)) {
+        // can only remove 1 char, so we use return
         return isPalindrome(s, i+1, j) || isPalindrome(s, i, j - 1);
       }
       i++;
