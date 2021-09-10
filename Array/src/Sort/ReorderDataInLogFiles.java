@@ -1,8 +1,13 @@
 package Sort;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+
+import static org.junit.Assert.assertEquals;
 
 public class ReorderDataInLogFiles {
 
@@ -20,8 +25,13 @@ public class ReorderDataInLogFiles {
     ArrayList<String> letterArr = new ArrayList<>();
     ArrayList<String> digitArr = new ArrayList<>();
     for (String str : logs) {
-      String[] arr = str.split(" ");
-      // if (String. arr[1])
+      String[] arr = str.split(" ", 2);
+      if (Character.isDigit(arr[1].charAt(1))) {
+        digitArr.add(str);
+      } else {
+        letterArr.add(str);
+      }
+
       /*
       if (arr[1] is word, letterArr.add(str)
       else digitArr.add(str)
@@ -40,6 +50,17 @@ public class ReorderDataInLogFiles {
    * Approach 1: Comparator
    */
   public String[] reorderLogFiles(String[] logs) {
+
+    /*
+    int compare(T o1, T o2) {
+    if (o1 < o2)
+        return -1;
+    else if (o1 == o2)
+        return 0;
+    else // o1 > o2
+        return 1;
+}
+     */
 
     Comparator<String> myComp =
         new Comparator<String>() {
@@ -62,7 +83,7 @@ public class ReorderDataInLogFiles {
             }
 
             // case 2). one of logs is digit-log
-            if (!isDigit1 && isDigit2)
+            if (!isDigit1 && isDigit2) // 1 is not digit, 2 is. letter goes first
               // the letter-log comes before digit-logs
               return -1;
             else if (isDigit1 && !isDigit2) return 1;
@@ -75,4 +96,13 @@ public class ReorderDataInLogFiles {
     Arrays.sort(logs, myComp);
     return logs;
   }
+
+  @Test
+  public void testReorderLogs() {
+    String[] log1 = {"dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"};
+    String[] expected1 = {"let1 art can","let3 art zero","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"};
+    String[] actual1 = reorderLogFiles(log1);
+    assertEquals(expected1, actual1);
+  }
+
 }
