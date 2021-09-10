@@ -9,11 +9,10 @@ public class ValidPalindromeII {
     int n = s.length();
     int i = 0, j = n -1;
 
+    // time limit exceeded
     while (i <= j) {
       if (s.charAt(i) != s.charAt(j)) {
-        if (!isPalindrome(s, i+1, j) && !isPalindrome(s, i, j - 1)) {
-          return false;
-        }
+        return isPalindrome(s, i+1, j) || isPalindrome(s, i, j - 1);
       }
       i++;
       j--;
