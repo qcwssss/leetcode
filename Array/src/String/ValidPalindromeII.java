@@ -11,7 +11,7 @@ public class ValidPalindromeII {
 
     while (i <= j) {
       if (s.charAt(i) != s.charAt(j)) {
-        if (!isPalindrome(s, i+1, j) || !isPalindrome(s, i, j - 1)) {
+        if (!isPalindrome(s, i+1, j) && !isPalindrome(s, i, j - 1)) {
           return false;
         }
       }
@@ -39,11 +39,16 @@ public class ValidPalindromeII {
     String s2 = "abca";
     String s3 = "abc";
 
-
     Assert.assertTrue(validPalindrome(s1));
     Assert.assertTrue(validPalindrome(s2));
     Assert.assertFalse(validPalindrome(s3));
-
-
   }
+
+  @Test
+  public void testPalindrome3() {
+    String s1 = "deeee";
+
+    Assert.assertTrue(validPalindrome(s1));
+  }
+
 }
