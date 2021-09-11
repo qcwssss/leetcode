@@ -1,9 +1,7 @@
 package Sort;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -22,45 +20,63 @@ public class ReorderDataInLogFiles {
     put the letter log at the front, and sorted lexicographically
     put the digit log behind
     */
-    ArrayList<String> letterArr = new ArrayList<>();
-    ArrayList<String> digitArr = new ArrayList<>();
-    for (String str : logs) {
-      String[] arr = str.split(" ", 2);
-      if (Character.isDigit(arr[1].charAt(1))) {
-        digitArr.add(str);
-      } else {
-        letterArr.add(str);
-      }
 
-      /*
-      if (arr[1] is word, letterArr.add(str)
-      else digitArr.add(str)
+    /*
+    if (arr[1] is word, letterArr.add(str)
+    else digitArr.add(str)
 
-      sort letterArr
-      put all items in letterArr to res[], then copy from digitArr
-       */
+    sort letterArr
+    put all items in letterArr to res[], then copy from digitArr
+     */
+    Comparator<String> myCmp =
+        new Comparator<String>() {
+          @Override
+          public int compare(String o1, String o2) {
+            String[] split1 = o1.split(" ", 2);
+            String[] split2 = o2.split(" ", 2);
 
-    }
-    String res[] = new String[logs.length];
-    return res;
+            boolean isDigit1 = Character.isDigit(split1[1].charAt(0));
+            boolean isDigit2 = Character.isDigit(split2[1].charAt(0));
+            // case 1). both are letters
+            if (!isDigit1 && isDigit2) {
+              //  sorted lexicographically by their contents
+              int cmp = split1[1].compareTo(split2[1]);
+              if (cmp != 0) return cmp;
+              // If contents are the same, sort them by their identifiers.
+              return split1[0].compareTo(split2[0]);
+            }
+            // case 2). only one log is letter
+            if (!isDigit1 && isDigit2) {
+              return -1;
+            } else if (isDigit1 && !isDigit2) {
+              return 1;
+            } else {
+              // case 3). both are digit
+              return 0;
+            }
+          }
+        };
+
+    Arrays.sort(logs, myCmp);
+    return logs;
   }
 
   /**
-   * @source https://leetcode.com/problems/reorder-data-in-log-files/solution/
-   * Approach 1: Comparator
+   * @source https://leetcode.com/problems/reorder-data-in-log-files/solution/ Approach 1:
+   *     Comparator
    */
   public String[] reorderLogFiles(String[] logs) {
 
     /*
-    int compare(T o1, T o2) {
-    if (o1 < o2)
-        return -1;
-    else if (o1 == o2)
-        return 0;
-    else // o1 > o2
-        return 1;
-}
-     */
+        int compare(T o1, T o2) {
+        if (o1 < o2)
+            return -1;
+        else if (o1 == o2)
+            return 0;
+        else // o1 > o2
+            return 1;
+    }
+         */
 
     Comparator<String> myComp =
         new Comparator<String>() {
@@ -99,10 +115,17 @@ public class ReorderDataInLogFiles {
 
   @Test
   public void testReorderLogs() {
-    String[] log1 = {"dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"};
-    String[] expected1 = {"let1 art can","let3 art zero","let2 own kit dig","dig1 8 1 5 1","dig2 3 6"};
+    String[] log1 = {
+      "dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero"
+    };
+    String[] expected1 = {
+      "let1 art can", "let3 art zero", "let2 own kit dig", "dig1 8 1 5 1", "dig2 3 6"
+    };
     String[] actual1 = reorderLogFiles(log1);
-    assertEquals(expected1, actual1);
-  }
+    String[] actual1b = reorderLogFilesMine(log1);
 
+    assertEquals(expected1, actual1);
+    assertEquals(expected1, actual1b);
+
+  }
 }
