@@ -3,26 +3,25 @@ package array_leet;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class MoveZeroes {
 
+  /**
+   * Place all non-zero digits in the front, and fill the rest with 0s.
+   * @source https://www.youtube.com/watch?v=1PEncepEIoE
+   */
   public void moveZeroes(int[] nums) {
-    // k-> 0 index, j -> digit pointer
-    int idx0 = -1, j = -1;
+    int idx = 0;
     for (int i = 0; i < nums.length; i++) {
-      if (idx0 < 0 && nums[i] == 0) {
-        idx0 = i;
-      } else if (nums[i] != 0) {
-        j = i;
+      if (nums[i] != 0) {
+        nums[idx] = nums[i];
+        idx++;
       }
-      // swap
-      if (j > idx0) {
-        nums[idx0] = nums[j];
-        nums[j] = 0;
-        idx0 = -1;
-      }
-
     }
-
+    for (int i = idx; i < nums.length; i++) {
+      nums[i] = 0;
+    }
   }
 
   @Test
@@ -30,6 +29,6 @@ public class MoveZeroes {
     int[] nums1 = {0,1,0,3,12};
     int[] expected1 = {1,3,12,0,0};
     moveZeroes(nums1);
-    Assert.assertTrue(expected1.equals(nums1));
+    Assert.assertArrayEquals(expected1, nums1);
   }
 }
