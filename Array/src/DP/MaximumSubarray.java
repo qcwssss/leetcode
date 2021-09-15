@@ -1,4 +1,4 @@
-package array_leet;
+package DP;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -53,6 +53,6 @@ public class MaximumSubarray {
   public void testMaxSubarray() {
     int[] nums1 = {-2,1,-3,4,-1,2,1,-5,4 };
     int expected1 = 6;
-    Assert.assertEquals(expected1, maxSubArray(nums1));
+    Assert.assertEquals(expected1, maxSubArrayDP(nums1));
   }
 }
