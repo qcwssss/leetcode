@@ -17,7 +17,8 @@ public class ReverseLinkedListII {
       this.next = next;
     }
 
-    public ListNode reverseBetween(ListNode head, int left, int right) {
+    // didn't work
+    public ListNode reverseBetween1st(ListNode head, int left, int right) {
       // decouple
       int count1 = 1, count2 = 1;
       ListNode fakeHead = head, fakeTail = head;
@@ -58,6 +59,40 @@ public class ReverseLinkedListII {
       }
       return newHead;
     }
+  }
+
+  public ListNode reverseBetween(ListNode head, int left, int right) {
+    ListNode fakeHead = new ListNode(-1);
+    fakeHead.next = head;
+    ListNode prev = fakeHead;
+    ListNode cur = fakeHead.next;
+
+    // find the start node of reverse
+    int i = 1;
+    while (i < left) {
+      cur = cur.next;
+      prev = prev.next;
+      i++;
+    }
+    ListNode node = prev;
+
+    // reverse
+    while (i <= right) {
+      ListNode next = cur.next;
+      cur.next = prev;
+      prev = cur;
+      cur = next;
+
+      i++;
+    }
+
+    // reconnect
+    node.next.next = cur;
+    node.next = prev;
+
+    return fakeHead.next;
+
+
   }
 
 }
