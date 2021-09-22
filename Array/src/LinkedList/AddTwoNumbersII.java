@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class AddTwoNumbersII {
   public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-    // use the property of Stack
+    // use the property of Stack: FILO
     Stack<Integer> s1 = new Stack<>();
     Stack<Integer> s2 = new Stack<>();
 
@@ -25,8 +25,8 @@ public class AddTwoNumbersII {
     ListNode newHead = null;
     int carry = 0;
     while (!s1.isEmpty() || !s2.isEmpty() || carry != 0) {
-      int sum = (s1.isEmpty() ? 0 : s1.pop()) + (s2.isEmpty() ? 0 : s2.pop());
-      int val = (sum  + carry)% 10;
+      int sum = (s1.isEmpty() ? 0 : s1.pop()) + (s2.isEmpty() ? 0 : s2.pop()) + carry;
+      int val = sum % 10;
       ListNode cur = new ListNode(val);
       cur.next = newHead;
       newHead = cur;
