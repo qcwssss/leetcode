@@ -46,6 +46,7 @@ public class MergeKSortedLists {
       while (!pq.isEmpty()) {
         cur.next = pq.poll();
         cur = cur.next;
+        if (pq.isEmpty()) break;
         if (cur.next != null) pq.offer(cur.next);
       }
     return dummy.next;
