@@ -5,13 +5,12 @@ import org.junit.Test;
 public class RemoveDuplicatesFromSortedListII {
 
   public ListNode deleteDuplicates(ListNode head) {
-    if (head == null) return head;
 
     // two pointers
     ListNode dummy  = new ListNode(-1);
     dummy.next = head;
     ListNode prev = dummy, cur = dummy.next;
-    while (cur.next != null && cur != null) {
+    while (cur != null && cur.next != null) {
       if (cur.next.val == cur.val) {
         int temp = cur.val;
         while (cur != null && cur.val == temp) {
