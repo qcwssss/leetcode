@@ -1,3 +1,7 @@
+package LinkedList;
+
+import LinkedList.ListNode;
+
 public class LinkedListCycle {
     
     public boolean hasCycle(ListNode head) {
