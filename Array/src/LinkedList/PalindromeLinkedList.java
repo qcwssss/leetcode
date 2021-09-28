@@ -21,7 +21,11 @@ public class PalindromeLinkedList {
     }
   }
 
-  /** Approach #1: Convert into an array. */
+  /**
+   * Approach #1: Convert into an array.
+   * space: O(n)
+   * time: O(n)
+   */
   public boolean isPalindrome(ListNode head) {
     ListNode ptr = head;
     ArrayList<Integer> aList = new ArrayList<>();
@@ -42,7 +46,7 @@ public class PalindromeLinkedList {
 
   /**
    * Approach #2: reversing the 2nd half and compare the two halves.
-   *
+   * space: O(n)
    * @source
    *     https://leetcode.com/problems/palindrome-linked-list/discuss/64501/Java-easy-to-understand
    */
