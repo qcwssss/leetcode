@@ -1,5 +1,8 @@
 package LinkedList;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RemoveZeroSumConsecutiveNodes {
 
   public ListNode removeZeroSumSublists(ListNode head) {
