@@ -1,5 +1,8 @@
 package LinkedList;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CopyListWithRandomPointer {
   // Definition for a Node.
   class Node {
@@ -16,30 +19,19 @@ public class CopyListWithRandomPointer {
 
   public Node copyRandomList(Node head) {
     // two pass
-    Node ptr = head; // traverse original node
-    Node newHead = new Node(head.val);
-
-    // map for link random
-    // Map<Integer, Node> map = new HashMap<>();
-    Node cur = newHead;
-    while (ptr != null) {
-      // map.put(cur.val, cur);
-      ptr = ptr.next;
-      cur.next = (ptr == null) ? null : new Node(ptr.val);
+    // copy all nodes' val
+    Map<Node, Node> map = new HashMap<>();
+    for(Node i = head; i != null; i = i.next) {
+      map.put(i, new Node(i.val));
     }
 
-    ptr = head;
-    cur = newHead;
-    while (ptr != null) {
-      if (ptr.random == null) {
-        cur.random = null;
-      } else {
-        cur.random = new Node(ptr.random.val);
-      }
-
-      ptr = ptr.next;
-      cur = cur.next;
+    // copy all nodes' next and random in the hashmap
+    for(Node i = head; i != null; i = i.next) {
+      map.get(i).next = map.get(i.next);
+      map.get(i).random = map.get(i.random);
     }
-    return newHead;
+    return map.get(head);
+
+
   }
 }
