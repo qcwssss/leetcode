@@ -43,5 +43,29 @@ public class ImplementStackUsingQueues {
     public boolean empty() {
       return q1.isEmpty() && q2.isEmpty();
     }
+
+    // push O(n) time
+    public void pushHeavey(int x) {
+      q2.offer(x);
+      top = x;
+      while (!q1.isEmpty()) {
+        q2.offer(q1.poll());
+      }
+      while (!q2.isEmpty()) {
+        q1.offer(q2.poll());
+      }
+    }
+    /*
+    public void push(int x) {
+    q2.add(x);
+    top = x;
+    while (!q1.isEmpty()) {
+        q2.add(q1.remove());
+    }
+    Queue<Integer> temp = q1;
+    q1 = q2;
+    q2 = temp;
+}
+     */
   }
 }
