@@ -1,5 +1,8 @@
 package dfs;
 
+import org.junit.Test;
+
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -9,57 +12,48 @@ public class SerializeAndDeserializeBinaryTree {
   public String serialize(TreeNode root) {
     StringBuilder builder = new StringBuilder();
     // BFS
-    Queue<TreeNode> q = new LinkedList<>();
-    if (root != null) q.offer(root);
-    while (!q.isEmpty()) {
-      int size = q.size();
-      StringBuilder level = new StringBuilder();
-      for (int i = 0; i < size; i++) {
-        TreeNode cur = q.poll();
-        level.append(cur.val);
-        level.append(',');
-        // build data
-        if (cur.left != null) q.offer(cur.left);
-        else q.offer(null);
-        if (cur.right != null) q.offer(cur.right);
-        else q.offer(null);
+    preOrder(root, builder);
+    return builder.toString();
+  }
 
-      }
-      builder.append(level);
+  private void preOrder(TreeNode node, StringBuilder ans) {
+    if (node == null) {
+      ans.append("#,");
+      return;
     }
-    String res = builder.substring(0, builder.length() - 1);
-    return res;
+    ans.append(node.val + ",");
+    preOrder(node.left, ans);
+    preOrder(node.right, ans);
+
   }
 
   // Decodes your encoded data to tree.
   public TreeNode deserialize(String data) {
-    int len = data.length();
-    String[] dataArr = data.split(",");
-    int[] vals = new int[len];
-    // build int array
-    for (int i = 0; i < len; i++) {
-      vals[i] = Integer.parseInt(dataArr[i]);
-    }
+    Queue<String> queue = new LinkedList<>(Arrays.asList(data.split(",")));
+
     // build tree
-    TreeNode root = new TreeNode(vals[0]);
+    return build(queue);
+  }
 
-    int idx = 1;
-    Queue<TreeNode> queue = new LinkedList<>();
-    queue.offer(root);
+  private TreeNode build(Queue<String> q) {
+    String rootStr = q.poll();
+    if (rootStr == null || rootStr.equals("#")) return null;
+    TreeNode root = new TreeNode(Integer.parseInt(rootStr));
+    root.left = build(q);
+    root.right = build(q);
+    if (q.isEmpty()) return root;
 
-    while (!queue.isEmpty()) {
-      for (int i = 0; i < queue.size(); i++) {
-        TreeNode cur = queue.poll();
-        cur.left = new TreeNode(vals[idx]);
-        cur.right = new TreeNode(vals[idx+1]);
-        queue.offer(cur.left);
-        queue.offer(cur.right);
-      }
-    }
     return root;
 
 
   }
+
+  @Test
+  public void testDeserialize() {
+    String input = "1,2,3,#,#,4,5";
+    TreeNode root = deserialize(input);
+  }
+
 
 // Your Codec object will be instantiated and called as such:
 // Codec ser = new Codec();
