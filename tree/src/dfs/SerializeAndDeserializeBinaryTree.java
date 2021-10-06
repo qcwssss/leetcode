@@ -41,7 +41,6 @@ public class SerializeAndDeserializeBinaryTree {
     TreeNode root = new TreeNode(Integer.parseInt(rootStr));
     root.left = build(q);
     root.right = build(q);
-    if (q.isEmpty()) return root;
 
     return root;
 
