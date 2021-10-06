@@ -10,41 +10,31 @@ public class SerializeAndDeserializeBinaryTree {
 
   // Encodes a tree to a single string.
   public String serialize(TreeNode root) {
-    StringBuilder builder = new StringBuilder();
-    // BFS
-    preOrder(root, builder);
-    return builder.toString();
-  }
+    // preorder
+    if (root == null) return "#";
+    String res = String.valueOf(root.val);
+    res += "," + serialize(root.left);
+    res += "," + serialize(root.right);
 
-  private void preOrder(TreeNode node, StringBuilder ans) {
-    if (node == null) {
-      ans.append("#,");
-      return;
-    }
-    ans.append(node.val + ",");
-    preOrder(node.left, ans);
-    preOrder(node.right, ans);
-
+    //return root.val + "," + serialize(root.left) +"," + serialize(root.right);
+    return res;
   }
 
   // Decodes your encoded data to tree.
   public TreeNode deserialize(String data) {
-    Queue<String> queue = new LinkedList<>(Arrays.asList(data.split(",")));
-
-    // build tree
-    return build(queue);
-  }
-
-  private TreeNode build(Queue<String> q) {
-    String rootStr = q.poll();
-    if (rootStr == null || rootStr.equals("#")) return null;
-    TreeNode root = new TreeNode(Integer.parseInt(rootStr));
-    root.left = build(q);
-    root.right = build(q);
-
+    Queue<String> q = new LinkedList<>(Arrays.asList(data.split(",")));
+    TreeNode root = dfs(q);
     return root;
 
+  }
 
+  private TreeNode dfs(Queue<String> queue) {
+    String rootStr = queue.poll();
+    if (rootStr == null || rootStr.equals("#")) return null;
+    TreeNode root = new TreeNode(Integer.valueOf(rootStr));
+    root.left = dfs(queue);
+    root.right = dfs(queue);
+    return root;
   }
 
   @Test
