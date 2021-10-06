@@ -32,7 +32,7 @@ public class SerializeAndDeserializeBST {
 
     String rootStr = queue.peek();
     int val = Integer.parseInt(rootStr);
-    if (val < lower || val > upper) return null;
+    if (val < lower || val > upper) return null; // BST property, check bound
     queue.poll();
     TreeNode root = new TreeNode(Integer.valueOf(rootStr));
     root.left = dfs(queue, lower, val);
