@@ -25,7 +25,7 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
       if (inStart > inEnd) return null;
       int val = postorder[postEnd];
       TreeNode root = new TreeNode(val);
-      int rootIdx = inorderMap.get(val);
+      int rootIdx = inorderMap.get(val); // inorder root index
       int rightSize = inEnd - rootIdx;
       root.right = build(postEnd - 1, rootIdx + 1, inEnd);
       root.left = build(postEnd - 1 - rightSize, inStart, rootIdx - 1);
