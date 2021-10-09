@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BinarySearchTreeIterator {
-
+  // O(n) memory, O(1) time
   class BSTIterator {
     int cur = -1;
     List<TreeNode> inorder;
