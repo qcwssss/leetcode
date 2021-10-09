@@ -11,24 +11,21 @@ public class DeleteNodeInABST {
 
     // key found
     // one side is null
-    if (root.left == null) return root.right;
+    else if (root.left == null) return root.right;
     else if (root.right == null) return root.left;
     // left and right both not null
     else {
-      int rightMin = findMin(root.right);
-      root.val = rightMin;
-      root.right = deleteNode(root.right, rightMin);
+      root.val = findMin(root.right);
+      root.right = deleteNode(root.right, root.val);
 
     }
     return root;
   }
 
   private int findMin(TreeNode node) {
-    int min = node.val;
     while (node.left != null) {
       node = node.left;
-      min = node.val;
     }
-    return min;
+    return node.val;
   }
 }
