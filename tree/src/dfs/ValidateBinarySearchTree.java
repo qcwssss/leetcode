@@ -1,5 +1,8 @@
 package dfs;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 public class ValidateBinarySearchTree {
 
   // approach #1: pass upper and lower bound
@@ -17,7 +20,7 @@ public class ValidateBinarySearchTree {
   // approach #2: inoreder recursive
   // inorder traversal for a BST is an array in ascending order
   long prev = Long.MIN_VALUE;
-  public boolean isValidBST(TreeNode root) {
+  public boolean isValidBST2(TreeNode root) {
     if (root == null) return true;
 
     boolean left = isValidBST(root.left);
@@ -27,5 +30,26 @@ public class ValidateBinarySearchTree {
     prev = root.val;
     return isValidBST(root.right);
 
+  }
+
+  // approach #3: inoreder iterative
+  public boolean isValidBST(TreeNode root) {
+    Deque<TreeNode> stack = new LinkedList<>();
+    TreeNode cur = root;
+    TreeNode prev = null;
+
+    while (root != null || !stack.isEmpty()) {
+      // exhaust left children
+      while (root != null) {
+        stack.push(root);
+        root = root.left;
+      }
+      root = stack.pop();
+      if (prev != null && prev.val >= root.val) return false;
+      prev = root;
+      root = root.right;
+    }
+
+    return true;
   }
 }
