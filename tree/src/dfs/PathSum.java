@@ -2,20 +2,17 @@ package dfs;
 
 public class PathSum {
 
-  int target;
   public boolean hasPathSum(TreeNode root, int targetSum) {
     if (root == null) return false;
-    target = targetSum;
-    return targetSum == sum(root, 0);
-
-
-  }
-
-  private int sum(TreeNode root, int count) {
-    if (root == null || count == target) return count;
-    if (root.left != null) sum(root.left, count + root.left.val);
-    if (root.right != null) sum(root.right, count + root.right.val);
-    return count;
+    if (root.left == null && root.right == null && targetSum == root.val) return true;
+    return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
 
   }
+
+  public boolean hasPathSum2(TreeNode root, int sum) {
+    if(root == null) return false;
+    if(root.left == null && root.right == null) return sum == root.val;
+    return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+  }
+
 }
