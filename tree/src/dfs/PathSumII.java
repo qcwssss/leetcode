@@ -20,7 +20,10 @@ public class PathSumII {
     //Base case: reach the leaf
     if (root.left == null && root.right == null && root.val == sum) {
       // find the path sum
-      //res.add(path);
+      // res.add(path);
+      // line 23 added an adress to res, when backtracking the path in res will be modified.
+      // we have to make a deep copy of path into res
+
       res.add(new LinkedList<>(path));
 
     } else {
