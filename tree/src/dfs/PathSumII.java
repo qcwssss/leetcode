@@ -17,19 +17,32 @@ public class PathSumII {
     if (root == null) return;
     path.add(root.val);
 
-    // find the path sum
+    //Base case: reach the leaf
     if (root.left == null && root.right == null && root.val == sum) {
-      res.add(path);
-      return;
-    }
+      // find the path sum
+      //res.add(path);
+      res.add(new LinkedList<>(path));
 
-    if (root.left != null) {
+    } else {
       dfs(root.left, sum - root.val, path);
-    }
-
-    if (root.right != null) {
       dfs(root.right, sum - root.val, path);
     }
+    // Backtrack
+    path.remove(path.size() -1);
+
   }
+
+  public static void main (String[] args) {
+    TreeNode root = new TreeNode(5, new TreeNode(4), new TreeNode(8));
+    root.right = new TreeNode(8, new TreeNode(13), new TreeNode(4));
+    root.right.right.left = new TreeNode(5);
+    root.right.right.right = new TreeNode(1);
+    root.left.left = new TreeNode(11, new TreeNode(7), new TreeNode(2));
+
+    PathSumII p2 = new PathSumII();
+    List<List<Integer>> ans = p2.pathSum(root, 22);
+    System.out.println(ans);
+  }
+
 
 }
