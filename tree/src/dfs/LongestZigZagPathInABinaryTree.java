@@ -21,6 +21,7 @@ public class LongestZigZagPathInABinaryTree {
     pair[0] = left[1] + 1; // left sum takes the  left children's right sum
     pair[1] = right[0] + 1; // right sum
     max = Math.max(max, Math.max(pair[0], pair[1]));
+    // Math.max(pair[0], pair[1]) will only update to the zigzag sum of the node
     return pair;
 
   }
