@@ -1,4 +1,4 @@
-package Games;
+package SingleArray;
 
 public class FibonacciNumber {
   public int fib(int n) {
