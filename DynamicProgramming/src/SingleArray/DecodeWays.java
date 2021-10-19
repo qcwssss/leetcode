@@ -11,7 +11,7 @@ public class DecodeWays {
     int[] memo = new int[len + 1];
 
     // build memo for dp
-    memo[0] = 1;
+    memo[0] = 1; // edge case
     memo[1] = s.charAt(0) == '0' ? 0 : 1;
     for (int i = 2; i <= len; i++) {
       int twoDigit = Integer.valueOf(s.substring(i-2, i)); // substring [i, j)
