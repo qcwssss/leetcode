@@ -4,7 +4,7 @@ import org.junit.Test;
 
 public class MaximumSumBSTInBinaryTree {
 
-  int maxSum;
+  int maxSum = Integer.MIN_VALUE;
 
   public int maxSumBST(TreeNode root) {
     if (root == null) return 0;
@@ -20,7 +20,7 @@ public class MaximumSumBSTInBinaryTree {
     int leftSum = sumTree(root.left);
     int rightSum = sumTree(root.right);
     if (isBST(root, Integer.MIN_VALUE)) {
-      maxSum = leftSum + rightSum + root.val;
+      maxSum = Math.max(leftSum + rightSum + root.val, maxSum);
     }
     return maxSum;
   }
@@ -43,5 +43,13 @@ public class MaximumSumBSTInBinaryTree {
     TreeNode root = new TreeNode(1, new TreeNode(2), new TreeNode(3));
 
     System.out.println(sumTree(root));
+  }
+
+
+  @Test
+  public void testSum1() {
+    TreeNode root = new TreeNode(-4, new TreeNode(-2), new TreeNode(-5));
+    int res = maxSumBST(root);
+    System.out.println(res);
   }
 }
