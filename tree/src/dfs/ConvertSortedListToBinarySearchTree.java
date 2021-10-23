@@ -17,6 +17,7 @@ public class ConvertSortedListToBinarySearchTree {
     // two pointer
     ListNode slow = head, fast = head;
     ListNode prev = dummy;
+    // check fast then check fast.next, in case even number of nodes
     while (fast != null && fast.next != null) {
       prev = prev.next;
       slow = slow.next;
