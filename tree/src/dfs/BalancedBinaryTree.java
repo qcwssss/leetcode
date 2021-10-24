@@ -22,8 +22,7 @@ public class BalancedBinaryTree {
   // O(n) time
   public boolean isBalanced(TreeNode root) {
     if (root == null) return true;
-    int diff = getDepth(root);
-    return diff != -1;
+    return getDepth(root) != -1;
 
   }
   // count depth
@@ -32,8 +31,7 @@ public class BalancedBinaryTree {
     int left = getDepth(root.left);
     int right = getDepth(root.right);
     // check left right difference
-    int diff = Math.abs(left - right);
-    if (diff > 1 || left == -1 || right == -1) {
+    if (Math.abs(left - right)> 1 || left == -1 || right == -1) {
       return -1;
     }
     return Math.max(left, right) + 1;
