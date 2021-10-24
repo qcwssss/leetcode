@@ -49,4 +49,20 @@ public class PopulatingNextRightPointersInEachNodeII {
     return root;
   }
 
+  // not works, recursive method
+  private void helper(Node left, Node right) {
+    if (left == null && right == null) return;
+    // or
+    if (left == null || right == null) return;
+
+
+    left.next = right;
+    helper(left.left, left.right);
+    helper(right.left, right.right);
+    Node midRight = right.left == null ? right.right : right.left;
+    Node midLeft = left.right == null ? left.left : left.right;
+    helper(midLeft, midRight);
+
+  }
+
 }
