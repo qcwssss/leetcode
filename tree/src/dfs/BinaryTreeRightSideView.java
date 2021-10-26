@@ -1,5 +1,7 @@
 package dfs;
 
+import org.junit.Test;
+
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +14,7 @@ public class BinaryTreeRightSideView {
     Deque<TreeNode> queue = new LinkedList<>();
     List<Integer> res = new LinkedList<>();
     queue.offer(root);
-    while (queue != null) {
+    while (queue.size() != 0) {
       int N = queue.size();
       for (int i = 0; i < N; i++) {
         TreeNode cur = queue.poll();
@@ -25,6 +27,11 @@ public class BinaryTreeRightSideView {
     }
     return res;
 
+  }
+ @Test
+  public void testRight(){
+    TreeNode root = new TreeNode(1, new TreeNode(2), new TreeNode(3));
+    System.out.println(rightSideView(root));
   }
 
 }
