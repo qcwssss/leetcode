@@ -32,10 +32,9 @@ public class WordLadder {
           }
         }
       }
-      if (queue.isEmpty()) return 0;
       step += 1;
     }
-    return step;
+    return 0;
   }
 
   @Test
