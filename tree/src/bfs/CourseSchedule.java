@@ -24,8 +24,8 @@ public class CourseSchedule {
 
     //BFS
     Queue<Integer> q = new LinkedList<>();
-    for (int in : indegeree) {
-      if (in == 0) q.offer(in);
+    for (int i = 0; i < indegeree.length; i++) {
+      if (indegeree[i] == 0) q.offer(i);
     }
     int count = 0;
     while (!q.isEmpty()) {
@@ -37,20 +37,6 @@ public class CourseSchedule {
       }
     }
     return count == numCourses;
-  }
-
-  @Test
-  public void testCourse() {
-    int num = 2;
-    int[][] e = new int[][] {{1,0}};
-    Assert.assertTrue(canFinish(num, e));
-  }
-
-  @Test
-  public void testCourse2() {
-    int num = 2;
-    int[][] e = new int[][] {{0, 1}};
-    Assert.assertTrue(canFinish(num, e));
   }
 
   public boolean canFinish2(int numCourses, int[][] prerequisites) {
@@ -73,6 +59,24 @@ public class CourseSchedule {
         if (--indegree[j] == 0) bfs.add(j);
     return bfs.size() == numCourses;
   }
+
+  @Test
+  public void testCourse() {
+    int num = 2;
+    int[][] e = new int[][] {{1,0}};
+    Assert.assertTrue(canFinish(num, e));
+  }
+
+  @Test
+  public void testCourse2() {
+    int num = 2;
+    int[][] e = new int[][] {{0, 1}};
+    //Assert.assertTrue(canFinish2(num, e));
+    Assert.assertTrue(canFinish(num, e));
+
+  }
+
+
 
 
 }
