@@ -21,6 +21,19 @@ public class Subsets {
     }
   }
 
+  // recursive backtracking
+  private void backtrack_Recursive(List<List<Integer>> res,int[] nums, List<Integer> temp, int start){
+    if (start >= nums.length) {
+      res.add(new LinkedList<>(temp)); // new list
+      return;
+    }
+    temp.add(nums[start]);
+    backtrack(res, nums, temp, start + 1);
+    temp.remove(temp.size() - 1);
+    backtrack(res, nums, temp, start + 1);
+
+  }
+
   @Test
   public void testSubsets() {
     int[] nums = new int[] {1, 2, 3};
