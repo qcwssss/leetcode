@@ -35,4 +35,10 @@ public class Permutations {
     int[] nums = new int[]{1, 2, 3};
     System.out.println(permute(nums));
   }
+
+  @Test
+  public void testPermutation2() {
+    int[] nums = new int[]{1, 1, 2};
+    System.out.println(permute(nums));
+  }
 }
