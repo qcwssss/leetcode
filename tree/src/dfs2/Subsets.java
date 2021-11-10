@@ -12,7 +12,7 @@ public class Subsets {
     return res;
   }
 
-  private void backtrack(List<List<Integer>> res,int[] nums, List<Integer> temp, int start ){
+  private void backtrack(List<List<Integer>> res, int[] nums, List<Integer> temp, int start) {
     res.add(new LinkedList<>(temp));
     for (int i = start; i < nums.length; i++) {
       temp.add(nums[i]);
@@ -22,7 +22,7 @@ public class Subsets {
   }
 
   // recursive backtracking
-  private void backtrack_Recursive(List<List<Integer>> res,int[] nums, List<Integer> temp, int start){
+  private void backtrack_Recursive(List<List<Integer>> res, int[] nums, List<Integer> temp, int start) {
     if (start >= nums.length) {
       res.add(new LinkedList<>(temp)); // new list
       return;
@@ -36,8 +36,9 @@ public class Subsets {
 
   @Test
   public void testSubsets() {
-    int[] nums = new int[] {1, 2, 3};
+    int[] nums = new int[]{1, 2, 3};
     System.out.println(subsets(nums));
   }
+
 
 }
