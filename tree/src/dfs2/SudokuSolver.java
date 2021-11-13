@@ -10,20 +10,18 @@ public class SudokuSolver {
     for (int i = 0; i < board[0].length; i++ ) {
       for (int j = 0; j < board.length; j++) {
         if (board[i][j] == '.') {
-          // add value
-          for (int k = 0; k <= 9; k++) {
-            char fill = (char)(k + '0');
-            if (isValid(board, i, j, fill)) {
-              board[i][j] = fill;
+          for (char c = '1'; c <= '9'; c++) {
+            if (isValid(board, i, j, c)) {
+              board[i][j] = c;
               if (solve(board)) return true; // If it's the solution, return true. End
               else board[i][j] = '.'; // Otherwise, go back
             }
-            return false; 
           }
+          return false; 
         }
       }
     }
-    return true;
+    return true; // for signature only
   }
 
   private boolean isValid(char[][] board, int xPos, int yPos, char val) {
@@ -35,7 +33,7 @@ public class SudokuSolver {
     }
 
     // column
-    for (int j = yPos; j < height; j++) {
+    for (int j = 0; j < height; j++) {
       if (board[j][yPos] == val) return false;
     }
 
