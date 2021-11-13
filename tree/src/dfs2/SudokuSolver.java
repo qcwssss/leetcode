@@ -3,7 +3,7 @@ package dfs2;
 public class SudokuSolver {
 
   public void solveSudoku(char[][] board) {
-
+    solve(board);
   }
 
   private boolean solve(char[][] board) {
@@ -15,15 +15,15 @@ public class SudokuSolver {
             char fill = (char)(k + '0');
             if (isValid(board, i, j, fill)) {
               board[i][j] = fill;
-              solve(board);
-              board[i][j] = '.';
-            } else {
-              continue;
+              if (solve(board)) return true; // If it's the solution, return true. End
+              else board[i][j] = '.'; // Otherwise, go back
             }
+            return false; 
           }
         }
       }
     }
+    return true;
   }
 
   private boolean isValid(char[][] board, int xPos, int yPos, char val) {
@@ -31,29 +31,20 @@ public class SudokuSolver {
     int height = board.length;
     // row
     for (int i = 0; i < width; i++) {
-      if (board[xPos][i] != '.' && i != yPos && board[xPos][i] == val) {
-        return false;
-      }
+      if (board[xPos][i] == val) return false;
     }
 
     // column
     for (int j = yPos; j < height; j++) {
-      if (board[j][yPos] != '.' && j != xPos && board[j][yPos] == val) {
-        return false;
-      }
+      if (board[j][yPos] == val) return false;
     }
 
     // 3*3 square
-    int xStart = (xPos / 3) * 3 - 1, xEnd = xStart + 3;
-    int yStart = (yPos / 3) * 3 - 1, yEnd = yStart + 3;
+    int xStart = (xPos / 3) * 3, xEnd = xStart + 3;
+    int yStart = (yPos / 3) * 3, yEnd = yStart + 3;
     for (int i = xStart; i < xEnd; i++) {
       for (int j = yStart; j < yEnd; j++ ) {
-        if (board[xPos][i] != '.'
-                && i != xPos
-                && j != yPos
-                && board[i][j] == val) {
-          return false;
-        }
+        if (board[i][j] == val) return false;
       }
     }
     return true;
