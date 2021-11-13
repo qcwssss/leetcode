@@ -6,13 +6,14 @@ public class SudokuSolver {
     solve(board);
   }
 
+  // backtrack
   private boolean solve(char[][] board) {
     for (int i = 0; i < board[0].length; i++ ) {
       for (int j = 0; j < board.length; j++) {
         if (board[i][j] == '.') {
-          for (char c = '1'; c <= '9'; c++) {
+          for (char c = '1'; c <= '9'; c++) { // Try 1 to 9 for each cell
             if (isValid(board, i, j, c)) {
-              board[i][j] = c;
+              board[i][j] = c; // fill this empty cell
               if (solve(board)) return true; // If it's the solution, return true. End
               else board[i][j] = '.'; // Otherwise, go back
             }
