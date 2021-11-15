@@ -19,6 +19,7 @@ public class NQueens {
 
   }
 
+  // check if (x, y) validate to put Q
   void dfs(char[][] board, int colIndex, List<List<String>> res) {
     if (colIndex == board.length) {
       res.add(construct(board));
