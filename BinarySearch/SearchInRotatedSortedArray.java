@@ -3,8 +3,8 @@ class SearchInRotatedSortedArray {
         int pivot = findMin(nums);
         int l = 0, r = nums.length - 1;
 
-        // choose end to compare
-        // if no rotate, r may eliminate target
+        // edge case: no rotate, r may eliminate target
+        // so we need to choose end to compare
         if (target <= nums[r]) l = pivot;
         else r = pivot - 1;
 
