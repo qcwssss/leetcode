@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BinarySearchTreeIterator {
   // O(n) memory, O(1) time
-  class BSTIterator {
+  class BSTIterator1 {
     int cur = -1;
     List<TreeNode> inorder;
     int capacity;
@@ -36,4 +36,33 @@ public class BinarySearchTreeIterator {
 
     }
   }
+
+  // O(h) memory, O(1) time
+  // optimize
+  class BSTIterator {
+    Stack<TreeNode> stack;
+
+    public BSTIterator(TreeNode root) {
+        stack = new Stack<>();
+        pushAllLeft(root);
+
+    }
+
+    public int next() {
+        TreeNode top = stack.pop();
+        pushAllLeft(top.right);
+        return top.val;
+    }
+
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
+
+    private void pushAllLeft(TreeNode root) {
+        while (root != null) {
+            stack.push(root);
+            root = root.left;
+        }
+    }
+}
 }
