@@ -1,4 +1,5 @@
 public class ThreeSumClosest {
+  // O(n^2) time
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
         int N = nums.length;
