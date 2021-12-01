@@ -26,4 +26,25 @@ public class SumWithMultiplicity {
           }
           return (int)(res % 1_000_000_007);
       }
+
+      // HashMap O(n^2) time
+      public int threeSumMulti(int[] arr, int target) {
+       Map<Integer, Integer> sums = new HashMap<>(); // <val, freq>
+
+       int res = 0;
+       int mod = (int)1e9  +7;// 1000000007;
+       System.out.println(mod);
+       int N = arr.length;
+       // 2 sum
+       for (int i = 0; i < N; i++) {
+           res = (res + sums.getOrDefault(target - arr[i], 0)) % mod;
+
+           for (int j = 0; j < i; j++) {
+               int temp = arr[i] + arr[j];
+               sums.put(temp, sums.getOrDefault(temp, 0) + 1); // update freq
+           }
+
+       }
+       return res;
+   }
 }
