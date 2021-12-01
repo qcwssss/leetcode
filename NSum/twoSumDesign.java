@@ -1,4 +1,5 @@
 public class TwoSumDesign {
+  // trade off, which method calls more
     List<Integer> list;
     Set<Integer> sum;
 
