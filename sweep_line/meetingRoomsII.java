@@ -30,6 +30,24 @@ public class meetingRoomsII {
 
     }
 
+    // Time Complexity: O(NlogN) -> sort
+    public int minMeetingRooms(int[][] intervals) {
+       List<int[]> list = new ArrayList<>();
+       for (int[] i : intervals) {
+           list.add(new int[]{i[0], 1});
+           list.add(new int[]{i[1], -1});
+       }
+       // sort by starting time
+       // free room first : a[1] - b[1] -> ascending order => -1 then +1
+       list.sort((a, b) -> a[0] == b[0] ? a[1] - b[1]: a[0] - b[0]);
+       int cnt = 0, max = 0;
+       for (int[] i : list) {
+           cnt += i[1];
+           max = Math.max(cnt, max);
+       }
+       return max;
+   }
+
     public static void testCountMin(int[][] intervals) {
         String strInterval = intervals.toString();
         System.out.println(strInterval + ": " + findMinNumRooms(intervals));
