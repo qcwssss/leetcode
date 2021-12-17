@@ -34,4 +34,28 @@ public class PartitionLabels {
         return res;    
         
     }
+
+    // O(n) time, O(26) => O(1) spave
+    class Solution {
+    public List<Integer> partitionLabels(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        // build last index map
+        for (int i = 0; i < s.length(); i++) map.put(s.charAt(i), i);
+        
+        List<Integer> res = new ArrayList<>();
+        int size = 0, end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            // extend end if last index is greater
+            end = Math.max(map.get(s.charAt(i)), end);
+            if (i != end) {
+                size++;
+            } else {
+                res.add(++size);
+                size = 0;
+            }            
+        }
+        return res;
+        
+    }
+}
 }
