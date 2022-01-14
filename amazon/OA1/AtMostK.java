@@ -1,6 +1,6 @@
 public class AtMostK {
     
-    public int distinctSubarraysAtMostKOdd(int[] nums, int k) {
+ public int distinctSubarraysAtMostKOdd(int[] nums, int k) {
        int n = nums.length;
         Set<String> set = new HashSet<>();
         for (int i = 0; i < n; i++) {
@@ -18,9 +18,6 @@ public class AtMostK {
         return set.size();
     }
     
-    private boolean isOdd(int x) {
-        return (x & 1) == 1;
-    }
     
 }
 
