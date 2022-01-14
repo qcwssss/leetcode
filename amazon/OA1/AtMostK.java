@@ -1,27 +1,20 @@
 public class AtMostK {
     
     public int distinctSubarraysAtMostKOdd(int[] nums, int k) {
-        int count = 0;
-        StringBuilder sb = new StringBuilder();
-        Set<String> set = new HashSet<String>();
-        
-        for (int i = 0; i < nums.length; i++) {
-            int oddCount = 0;
-            sb.setLength(0);
-            
-            for(int j = i; j < nums.length; j++) {
-                if(isOdd(nums[j])) {
-                    oddCount++;        
-                }
-                
-                if(oddCount > k)
-                    break;
-                
-                sb.append("{").append(nums[j]).append("},");
+       int n = nums.length;
+        Set<String> set = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            int odd = 0;
+            StringBuilder sb = new StringBuilder();
+            for (int j = i; j < n; j++) {
+                if (nums[j] % 2 == 1) odd++;
+                    
+                if (odd > k) break;
+                sb.append(nums[j]);
                 set.add(sb.toString());
             }
+
         }
-        
         return set.size();
     }
     
